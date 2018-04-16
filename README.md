@@ -7,7 +7,7 @@
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/2.jpeg)
 
 
-比如测试团队的lipengfei同学在登录到面板后虽然能够看看到该面板所展示出来的APP;但是在访问一个没有权限的APP时就会弹出提示;
+比如测试团队的lipengfei同学在登录到面板后虽能看到该面板所展示出来的所有APP;但是在访问一个没有权限的APP时就会弹出提示;
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/5.jpeg)
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/6.jpeg)
 
@@ -15,7 +15,6 @@
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/4.jpeg)
 ##### 平台涵盖技术点:
 * 蓝鲸的统一认证框架
-
 
 ##### 平台功能:
 * 该APP的作用是不同岗位员工访问APP进行登录权限认证;
