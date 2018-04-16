@@ -1,0 +1,156 @@
+<%inherit file="base.html"/>
+<%block name="content">
+<link href="${STATIC_URL}app_perm/css/dataTables.bootstrap.css" rel="stylesheet"/>
+<script src="${STATIC_URL}app_perm/js/jquery-1.10.2.min.js"></script>
+<script src="${STATIC_URL}app_perm/js/jquery.dataTables.js"></script>
+<script src="${STATIC_URL}app_perm/js/dataTables.bootstrap.js"></script>
+
+    <div class="king-layout1-content container">
+        <section class="king-content-header king-info-header mb20 pb10 mt20">
+            <h1 class="pull-left">
+                App列表
+            </h1>
+        </section>
+        % if result:
+        <div role="alert" class="alert alert-success">
+            <strong>提示: </strong> 用户对应app的权限控制。只对<code>已上线</code>的应用进行权限控制即可,默认管理员有所有App访问权限！</b>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 chart-one">
+                <div class="king-block king-block-bordered">
+                    <div class="king-block-content">
+                        <table id="table2_demo2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                   <th>App名称</th>
+                                                   <th>App作者</th>
+                                                   <th>App创建时间</th>
+                                                   <th>App状态</th>
+                                                   <th>访问地址</th>
+                                                   <th>action</th>
+
+                                                </tr>
+                                            </thead>
+
+                                             <tbody>
+                                                % for row in data:
+
+                                                        <tr>
+                                                            <td class="font-family: sans-serif;">${row[1]}</td>
+                                                            % if row[4] == '':
+                                                                <td>bk</td>
+                                                            % else:
+                                                                <td>${row[4]}</td>
+                                                            % endif
+                                                            <td>${row[5]}</td>
+                                                            % if row[6] in [0]:
+                                                                <td style="vertical-align:middle;">
+                                                                        <label class="label label-default">已下架</label>
+                                                                </td>
+                                                            % elif row[6] in [1]:
+                                                                   <td style="vertical-align:middle;">
+                                                                        <label class="label label-warning">开发中</label>
+                                                                </td>
+                                                            % elif row[6] in [3]:
+                                                                <td style="vertical-align:middle;">
+                                                                    <label class="label label-info">测试中</label>
+                                                                </td>
+                                                            % elif row[6] in [4]:
+                                                                 <td style="vertical-align:middle;">
+                                                                    <label class="label label-success">已上线</label>
+                                                                </td>
+                                                            % elif row[6] in [8]:
+                                                                <td style="vertical-align:middle;">
+                                                                    <label class="label label-default">正在提测</label>
+                                                                </td>
+                                                            % elif row[6] in [9]:
+                                                                <td style="vertical-align:middle;">
+                                                                    <label class="label label-default">正在上线</label>
+                                                                </td>
+                                                            % elif row[6] in [10]:
+                                                                <td style="vertical-align:middle;">
+                                                                    <label class="label label-default">正在下架</label>
+                                                                </td>
+                                                            % else:
+                                                                %endif
+
+
+                                                            % if row[6] not in [4]:
+                                                                <td>
+                                                                  <a style="color:#f92106" href="" title="点击访问">
+                                                                    ${BK_PLAT_HOST}/o/${row[2]}
+                                                                  </a>
+                                                                </td>
+                                                                <td>
+                                                            % else:
+                                                              <td>
+                                                                <a target="_blank" style="color:#44b549" href="${BK_PLAT_HOST}/o/${row[2]}" title="点击访问">
+                                                                  ${BK_PLAT_HOST}/o/${row[2]}
+                                                                </a>
+                                                              </td>
+                                                              <td>
+                                                            % endif
+
+                                                            % if row[6] in [4]:
+                                                                    <button class="btn btn-xs btn-success" onclick="window.location.href='${SITE_URL}app_permission/?app_code=${row[2]}&app_name=${row[1]}'">权限配置</button>
+
+                                                            % else:
+                                                                       <button class="btn btn-xs btn-info disabled" >无需操作</button>
+                                                            % endif
+                                                                </td>
+
+                                                        </tr>
+
+                                                    % endfor
+                                                </tbody>
+                                                <tfoot >
+                                            <tr>
+
+                                        </tr>
+                                </tfoot>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        % else:
+        <div role="alert" class="alert alert-danger">
+            <strong>提示: </strong> Paas数据库连接异常: 【${data}】</b>
+        </div>
+        % endif
+
+    </div>
+    <!-- content end -->
+    <!-- 表格分页功能 -->
+<script>
+  $(function () {
+    var language = {
+      search: '搜索：',
+      lengthMenu: "每页显示 _MENU_ 记录",
+      zeroRecords: "没找到相应的数据！",
+      info: "分页 _PAGE_ / _PAGES_",
+      infoEmpty: "暂无数据！",
+      infoFiltered: "(从 _MAX_ 条数据中搜索)",
+      paginate: {
+        first: '首页',
+        last: '尾页',
+        previous: '上一页',
+        next: '下一页'
+      }
+    };
+    $('#table2_demo2').dataTable({
+      paging: true, //隐藏分页
+      ordering: false, //关闭排序
+      info: false, //隐藏左下角分页信息
+      searching: true, //关闭搜索
+      pageLength : 10, //每页显示几条数据
+      lengthChange: false, //不允许用户改变表格每页显示的记录数
+      language: language, //汉化
+
+    } );
+  });
+</script>
+
+
+</%block>

@@ -1,0 +1,97 @@
+% if request.user.is_superuser:
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+
+        <!-- 去掉bootstrap响应式的样式文件 -->
+        <link href="${STATIC_URL}app_perm/css/bootstrap_noresponsive.css" rel="stylesheet">
+        <!-- kendo ui css -->
+        <link href="${STATIC_URL}app_perm/css/kendo.common.min.css" rel="stylesheet">
+        <link href="${STATIC_URL}app_perm/css/kendo.default.min.css" rel="stylesheet">
+        <!--蓝鲸平台APP 公用的样式文件 -->
+
+        <link href="${STATIC_URL}app_perm/css/bk.css?v=1.0.1" rel="stylesheet">
+        <link href="${STATIC_URL}css/base.css?v=1.0.1" rel="stylesheet" type="text/css"/>
+        <link href="${STATIC_URL}app_perm/css/style.css" rel="stylesheet">
+        <link href="${STATIC_URL}app_perm/css/sweetalert.css" rel="stylesheet">
+
+    </head>
+<body>
+
+<!--MODULE_START-->
+<div class="king-layout1-main" style="width:100%; height: auto;">
+    <!-- header start -->
+    <div class="king-layout1-header" style=" background:#eee;">
+        <div class="king-header2 navbar navbar-blue">
+            <div class="container">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="${SITE_URL}" title="预警系统"><span class="shape shape1"></span><span class="shape shape2"></span><span class="shape shape3"></span><span class="shape shape4"></span><span class="txt">APP权限控制平台</span></a> </div>
+                <div class="">
+                  <ul class="nav navbar-nav navbar-left">
+                    <li class="active"><a href="${SITE_URL}setting"><span>配置</span></a></li>
+                    <li><a href="${SITE_URL}"><span>APP列表</span></a></li>
+                    <li><a href="${BK_PLAT_HOST}"><span>返回工作台</span></a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="${BK_PLAT_HOST}/accounts/profile/">
+                                       <span> <code>${request.user}</code> </span>
+                                        <span class="avatar">
+                                            <img src="https://magicbox.bk.tencent.com/static_api/v3/components/horizontal_nav9/images/avatar.jpg"> </span>
+                                    </a>
+                                </li>
+                                <li><a href="${LOGOUT_URL}">注销</a></li>
+                            </ul>
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- content start -->
+    <%block name='content'></%block>
+    <!-- content end -->
+
+    <!-- footer start -->
+    <hr>
+    <div class="king-layout1-footer">
+        <footer class="king-footer">
+            <p class="king-copyright">Copyright © 2017-2018 OutMan. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <!-- footer end -->
+</div>
+<!--MODULE_END-->
+
+<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+<script src="${STATIC_URL}app_perm/js/sweetalert.min.js"></script>
+
+<script src="https://magicbox.bkclouds.cc/static_api/v3/bk/js/bk.js"></script>
+
+</body>
+</html>
+% else:
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>访问权限不足(403页)</title>
+<link href="${STATIC_URL}css/base.css?v=1.0.1" rel="stylesheet" type="text/css"/>
+</head>
+<body style="font-family:Microsoft Yahei;" class="king-errorpage-middle">
+    <div class="king-exception-box king-login-page">
+        <img src="${STATIC_URL}img/expre_403.png">
+        <h1>您对此APP没有访问权限 </h1>
+        <button class="king-btn-demo king-btn king-success" onclick="window.location.href='${BK_PLAT_HOST}'" title="返回到工作台">返回到工作台</button>
+        <button class="king-btn-demo king-btn king-warning" onclick="window.location.href='${LOGOUT_URL}'" title="退出登录">返回登录</button>
+    </div>
+</body>
+</html>
+% endif

@@ -1,0 +1,230 @@
+<%inherit file="base.html"/>
+<%block name="content">
+    <!-- content start -->
+    <script src="${STATIC_URL}app_perm/js/jquery-1.10.2.min.js"></script>
+    <div class="king-layout1-content container">
+        <section class="king-content-header king-info-header mb20 pb10 mt20">
+            <h1 class="pull-left">
+                连接配置
+            </h1>
+
+        </section>
+
+        % if  result:
+          <div class="row">
+            <div class="col-sm-12 chart-one" id="chartA">
+                <div class="king-block-content">
+                    <div class="king-notice-box king-notice-happy">
+                        <p class="king-notice-text">
+                            数据库配置已保存^o^
+                        </p>
+                </div>
+                <div role="alert" class="alert alert-success">
+                    <strong>提示: </strong> 该配置为连接到paas平台数据库连接信息.</b>
+                </div>
+                 <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                           <th>数据库用户</th>
+                           <th>数据库地址</th>
+                           <th>数据库端口</th>
+                           <th>数据库密码</th>
+                           <th>action</th>
+                        </tr>
+                    </thead>
+
+                     <tbody>
+                        % for each_data in data:
+                                <tr>
+                                    <td>${each_data['p_user']}</td>
+                                    <td>${each_data['p_host']}</td>
+                                    <td>${each_data['p_port']}</td>
+                                    <td>*************</td>
+                                    <td>
+                                        <input type="button" class="king-btn king-danger" check_id="${each_data['id']}" onclick=del_db(this) value="删除配置">
+                                    </td>
+                                </tr>
+
+                            % endfor
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        % else:
+        <div role="alert" class="alert alert-danger">
+          <strong>提示: </strong> 连接信息为空, 该配置为连接到paas平台数据库连接信息.</b>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 chart-one" >
+                <div class="king-block king-block-bordered">
+                    <div class="king-block-content">
+
+                              <form class="form-horizontal" id="myform">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">数据库地址:</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="host">
+                                    </div>
+                                    <span class="text-danger mt5 fl">*</span>
+                                </div>
+                                  <div class="form-group">
+                                    <label   class="col-sm-3 control-label">数据库用户:</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="user">
+                                    </div>
+                                    <span class="text-danger mt5 fl">*</span>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">数据库密码:</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="password">
+                                    </div>
+                                    <span class="text-danger mt5 fl">*</span>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">数据库端口(默认3306):</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="port">
+                                    </div>
+                                    <span class="text-danger mt5 fl">*</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-7 col-sm-offset-3">
+                                        <input type="submit"  class="king-btn king-success"  onclick="DoAjax()" value="提交">
+                                        <input type="reset" class="king-btn king-default" value="重置">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+         % endif
+<!--
+            <div class="col-sm-6 chart-one" id="chartC">
+                <div class="king-block king-block-bordered">
+                    <div class="king-block-header  king-gray-light">
+                        <ul class="king-block-options">
+                            <li>
+                                <button type="button"><i class="fa fa-cog"></i></button>
+                            </li>
+                        </ul>
+                        <h3 class="king-block-title">故障来源分布</h3>
+                    </div>
+                    <div class="king-block-content">
+                        <div class="chart-content" style="overflow:hidden;">
+                            <div class="tc bc" style="margin-top:200px;">
+                                <img src="https://magicbox.bkclouds.cc/static_api/v3/components/loading1/images/loading_2_24x24.gif"> 数据加载中,请稍后...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-6 chart-one">
+                <div class="king-block king-block-bordered">
+                    <div class="king-block-header  king-gray-light">
+                        <ul class="king-block-options">
+                            <li>
+                                <button type="button"><i class="fa fa-cog"></i></button>
+                            </li>
+                        </ul>
+                        <h3 class="king-block-title f12">密码破解拦截<span class="text-muted">(单位/次)</span></h3>
+                    </div>
+                    <div class="king-block-content">
+                        <div class="chart-content" id="chartB" style="overflow:hidden;">
+                            <div class="tc bc" style="margin-top:200px;">
+                                <img src="https://magicbox.bkclouds.cc/static_api/v3/components/loading1/images/loading_2_24x24.gif"> 数据加载中,请稍后...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 chart-one">
+                <div class="king-block king-block-bordered">
+                    <div class="king-block-header  king-gray-light">
+                        <ul class="king-block-options">
+                            <li>
+                                <button type="button"><i class="fa fa-cog"></i></button>
+                            </li>
+                        </ul>
+                        <h3 class="king-block-title f12">网站Web攻击防护<span class="text-muted">(单位/次)</span></h3>
+                    </div>
+                    <div class="king-block-content">
+                        <div class="chart-content" id="chartD" style="overflow:hidden;">
+                            <div class="tc bc" style="margin-top:200px;">
+                                <img src="https://magicbox.bkclouds.cc/static_api/v3/components/loading1/images/loading_2_24x24.gif"> 数据加载中,请稍后...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+    </div>
+    <!-- content end -->
+
+<script>
+    function DoAjax() {
+        var all=$('#myform').serialize()
+        $.ajax ({
+            type: 'post',
+            url: '${SITE_URL}setting/?' + all,
+            success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                if (res.result) {
+                    swal(res.message);
+                }
+                else {
+                    swal(res.message);
+                }
+            }
+        })
+    }
+</script>
+
+<script>
+    function del_db(_this) {
+        var info_id = $(_this).attr("check_id");
+        swal({
+              title: "您确定要删除该配置?",
+              text: "删除后需从新录入...",
+              type: "warning",
+              showCancelButton: true,
+              showLoaderOnConfirm: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "是的，删除它",
+              cancelButtonText: "我在想想吧...",
+              closeOnConfirm: false,
+              closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+            },
+              function(isConfirm){
+              if (isConfirm) {    // 如果确认就会去携带者hostname去后台处理
+                $.ajax ({
+                        type:'post',
+                        url:"${SITE_URL}del_db/?info_id=" + info_id,
+                        success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                            if (res.result) {
+                                swal(res.message, "Your imaginary file has been deleted.", "success");
+                                //$("input[check_id="+check_id+"]").parents("tr").remove(); //获取要删除的那行节点
+                                $(_this).parents("tr").remove();
+                                window.location.reload()
+                            }
+                            else {
+                                swal(res.message, "Your imaginary file is safe :)", "error");
+                            }
+                        }
+                    });
+                 }
+            });
+    }
+</script>
+
+</%block>

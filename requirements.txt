@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# 工程预装模块
+# 需要额外的python包，可直接在文件后面添加
+# 请确保指定的包和版本号，可通过pip安装
+
+Django==1.8.11
+pymysql==0.6.7
+MarkupSafe==0.23
+Mako==1.0.4
+httplib2==0.9.1
+suds==0.4
+celery==3.1.18
+django-celery==3.1.16
+supervisor==3.3.1
+uWSGI==2.0.13.1
+requests==2.9.1

@@ -1,0 +1,19 @@
+body{overflow-y: scroll; padding: 0 30px 30px 30px; background: #3B3F4F;}
+.king-layout1-main{background: #fff; width: 1200px !important; }
+.navbar-right .dropdown-menu{left:0}
+.navbar-nav{margin:0;}
+.navbar-nav > li { float: left;}
+.navbar-nav > li > a {padding:15px 20px;}
+.navbar-left{float:left}
+.navbar-right{float:right}
+.navbar-header{float:left}
+.king-layout1-content{
+    margin: auto;
+}
+#chartA .chart-content,#chartB,#chartC .chart-content,#chartD,.word-chart{
+	min-height: 400px;
+}
+
+.king-layout1-main{
+    height: auto;
+}
