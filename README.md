@@ -5,6 +5,8 @@
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/3.jpeg)
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/1.jpeg)
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/2.jpeg)
+![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/4.jpeg)
+
 
 ##### 平台涵盖技术点:
 * 蓝鲸的统一认证框架
