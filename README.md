@@ -1,4 +1,4 @@
-##### **bkpermisson 一款基于腾讯蓝鲸开发者平台开发的APP **
+### **bkpermisson 一款基于腾讯蓝鲸开发者平台开发的APP **
 
 ##### 开发框架: 蓝鲸开发者平台
 ![](https://github.com/guomaoqiu/Blueking_Project_bkpermission/raw/master/screenshots/blueking_dev.jpeg)
